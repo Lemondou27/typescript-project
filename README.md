@@ -40,13 +40,13 @@ I added two features that were not included in the original version shown in the
 6. To test the chat, open the same address in two browser windows or tabs. Enter a Name in each one and send messages.
 
 IO-Chat/
-├── Index.html
-├── server.js
-├── package.json
-├── .gitignore
-├── README.md
-└── screenshots/
-    └── IO CHAT.png
+   ├── Index.html
+   ├── server.js
+   ├── package.json
+   ├── .gitignore
+   ├── README.md
+   └── screenshots/
+       └── IO CHAT.png
 
 
 
