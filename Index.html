@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IO Chat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        body {
+            margin-top: 30px;
+        }
+        .msg-time {
+            float: right;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="well">
+                    <h3>Online Users</h3>
+                    <ul class="list-group" id="users"></ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="chat" id="chat"></div>
+                <form id="messageForm">
+                    <div class="form-group">
+                        <label for="name">Enter Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Enter Message</label>
+                        <textarea class="form-control" id="message" required></textarea>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="send message" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var socket = io();
+            var $messageForm =$('#messageForm');
+            var $message =$('#message');
+            var $name =$('#name');
+            var $chat =$('#chat');
+
+            $messageForm.submit(function (e) {
+                e.preventDefault();
+                socket.emit('send message', {
+                    name: $name.val(),
+                    msg: $message.val()
+                });
+                $message.val('');
+                console.log('submitted');
+            });
+
+            socket.on('new message', function (data) {
+                var $messageDisplay =$('<div class="well"></div>');
+                $('<span class="msg-time"></span>').text(data.timestamp).appendTo($messageDisplay);
+                $('<strong></strong>').text(data.name + ': ').appendTo($messageDisplay);
+                $('<span></span>').text(data.msg).appendTo($messageDisplay);
+                $chat.append($messageDisplay);
+            });
+        });
+    </script>
+</body>
+</html>
