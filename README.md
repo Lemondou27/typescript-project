@@ -43,7 +43,8 @@ I added two features that were not included in the original version shown in the
 ```text
 CHATAPP/
    ├── Index.html
-   ├── server.js
+   ├── src/
+      └──server.ts
    ├── package.json
    ├── .gitignore
    ├── README.md
