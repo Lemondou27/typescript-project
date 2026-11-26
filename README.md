@@ -52,7 +52,7 @@ CHATAPP/
 ```
 
 
-Screenshot
+## Screenshot
 
 After running the application, take a screenshot showing the chat working. For a clearer demonstration, open two browser windows, use different usernames, and show a message from each user. Save the screenshot as:
 
